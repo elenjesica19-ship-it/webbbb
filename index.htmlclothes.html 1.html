@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Clothesbub - pakaian anak muda gaul dan aesthetic. Pesan sekarang!" />
+  <title>Clothesbub - E-commerce pakaian</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f8f8;
+    }
+    header {
+      background-color: #336b60;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0.5rem 0 0 0;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav ul li a:hover {
+      text-decoration: underline;
+    }
+    .produk-list {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .produk {
+      background: white;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .produk img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    .produk h3 {
+      margin: 0.75rem 0 0.5rem 0;
+      font-size: 1.2rem;
+    }
+    .produk p {
+      font-size: 1rem;
+      color: #555;
+    }
+    button {
+      background-color: #000000;
+      border: none;
+      color: white;
+      padding: 0.5rem 1.25rem;
+      margin-top: 0.75rem;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a082;
+    }
+    #keranjang {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    #daftar-keranjang {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 1rem;
+    }
+    #daftar-keranjang li {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.25rem 0;
+      border-bottom: 1px solid #ccc;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #333;
+      color: white;
+      margin-top: 3rem;
+    }
+    #external {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    #external a {
+      color: #0c7e7e;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    #external a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Clothesbub</h1>
+    <p>No. Bisnis: 085706194082</p>
+    <nav>
+      <ul>
+        <li><a href="#">Beranda</a></li>
+        <li><a href="#produk">Produk</a></li>
+        <li><a href="#keranjang">Keranjang</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Daftar Produk -->
+  <section id="produk" class="produk-list">
+    <h2>Produk Kami</h2>
+    <div class="produk">
+      <img src="https://i.pinimg.com/736x/f9/25/26/f9252660929cad5bed4eb7010db21ae7.jpg" alt="Cardigan" />
+      <h3>Cardigan</h3>
+      <p>Rp 200.000</p>
+      <button onclick="tambahKeKeranjang('Cardigan', 200000)">Tambah ke Keranjang</button>
+    </div>
+    <div class="produk">
+      <img src="https://i.pinimg.com/1200x/61/be/88/61be8885f6d622aae421f03f480d2441.jpg" alt="Brown crop" />
+      <h3>Brown crop</h3>
+      <p>Rp 250.000</p>
+      <button onclick="tambahKeKeranjang('Brown crop', 250000)">Tambah ke Keranjang</button>
+    </div>
+
+    <div class="produk">
+      <img src="https://i.pinimg.com/1200x/8c/e4/5e/8ce45eb0ad483a0117e7f1c87471d7e1.jpg" alt="Ribbon Jumpsuit" />
+      <h3>Ribbon Jumpsuit</h3>
+      <p>Rp 400.000</p>
+      <button onclick="tambahKeKeranjang('Brown crop', 400000)">Tambah ke Keranjang</button>
+    </div>
+  </section>
+
+  <!-- Keranjang -->
+  <section id="keranjang">
+    <h2>Keranjang Belanja</h2>
+    <ul id="daftar-keranjang"></ul>
+    <p>Total: Rp <span id="total">0</span></p>
+    <button onclick="checkout()">Checkout</button>
+  </section>
+
+  <section id="external">
+    <h2>Link WhatsApp</h2>
+    <p>Nomor WhatsApp saya. Anda bisa menghubungi nomor ini:</p>
+    <div class="example">
+        <p>Telepon saya, klik di bawah.</p>
+        <p>My Phone: <a href="tel:6285706194082">Hubungi me 62857-0619-4082</a></p>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Clothesbub</p>
+  </footer>
+
+  <script>
+    let keranjang = [];
+    let totalHarga = 0;
+
+    function tambahKeKeranjang(nama, harga) {
+      keranjang.push({ nama, harga });
+      totalHarga += harga;
+      tampilkanKeranjang();
+    }
+
+    function tampilkanKeranjang() {
+      const daftarKeranjang = document.getElementById('daftar-keranjang');
+      const totalElem = document.getElementById('total');
+      daftarKeranjang.innerHTML = '';
+      keranjang.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.textContent = item.nama + ' - Rp ' + item.harga.toLocaleString('id-ID');
+        const btnRemove = document.createElement('button');
+        btnRemove.textContent = 'Hapus';
+        btnRemove.style.marginLeft = '10px';
+        btnRemove.onclick = function() {
+          hapusDariKeranjang(index);
+        };
+        li.appendChild(btnRemove);
+        daftarKeranjang.appendChild(li);
+      });
+      totalElem.textContent = totalHarga.toLocaleString('id-ID');
+    }
+
+    function hapusDariKeranjang(index) {
+      totalHarga -= keranjang[index].harga;
+      keranjang.splice(index, 1);
+      tampilkanKeranjang();
+    }
+
+    function checkout() {
+      if (keranjang.length === 0) {
+        alert('Keranjang masih kosong!');
+        return;
+      }
+      let pesan = 'Pesanan Anda:\n';
+      keranjang.forEach(item => {
+        pesan += '- ' + item.nama + ' (Rp ' + item.harga.toLocaleString('id-ID') + ')\n';
+      });
+      pesan += 'Total: Rp ' + totalHarga.toLocaleString('id-ID') + '\n\nTerima kasih sudah berbelanja di Clothesbub!';
+      alert(pesan);
+      keranjang = [];
+      totalHarga = 0;
+      tampilkanKeranjang();
+    }
+  </script>
+</body>
+</html>
